@@ -1,18 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AKT.Models;
+using AKTTool.Models;
+using AKTTool.Services;
 
 namespace AKT.Controllers
 {
   public class HomeController : Controller
   {
-    public IActionResult Index()
+    private readonly IDatabaseServices _databaseServices;
+
+    public HomeController(IDatabaseServices databaseServices)
+    {
+      _databaseServices = databaseServices;
+    }
+
+    public ActionResult Index()
     {
       return View();
+    }
+
+      public ActionResult Insert(Door model)
+    {
+      _databaseServices.insert(model);
+
+      return View("Index", model);
     }
 
     public IActionResult About()

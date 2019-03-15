@@ -18,21 +18,23 @@ namespace AKTTool.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AKTTool.Models.Door", b =>
+            modelBuilder.Entity("AKTTool.Models.General", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("code");
 
+                    b.Property<int>("gridRow");
+
                     b.Property<string>("link");
 
                     b.Property<string>("type");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.ToTable("doors");
+                    b.ToTable("generals");
                 });
 #pragma warning restore 612, 618
         }

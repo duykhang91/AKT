@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AKTApp", "AKT\AKTApp.csproj", "{A7FF784B-4E20-4C94-9E18-B3E7C144CDC7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AKTTool", "AKTToo\AKTTool.csproj", "{19FEBBD9-B7AC-4723-8696-1D766E9167A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AKTTool", "AKTTool\AKTTool.csproj", "{70FFC747-4EBD-48D1-95F2-0DD1E0D6CF58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{A7FF784B-4E20-4C94-9E18-B3E7C144CDC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7FF784B-4E20-4C94-9E18-B3E7C144CDC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7FF784B-4E20-4C94-9E18-B3E7C144CDC7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19FEBBD9-B7AC-4723-8696-1D766E9167A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19FEBBD9-B7AC-4723-8696-1D766E9167A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19FEBBD9-B7AC-4723-8696-1D766E9167A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19FEBBD9-B7AC-4723-8696-1D766E9167A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70FFC747-4EBD-48D1-95F2-0DD1E0D6CF58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70FFC747-4EBD-48D1-95F2-0DD1E0D6CF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70FFC747-4EBD-48D1-95F2-0DD1E0D6CF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70FFC747-4EBD-48D1-95F2-0DD1E0D6CF58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

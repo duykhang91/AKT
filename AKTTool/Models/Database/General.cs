@@ -1,6 +1,6 @@
 ﻿namespace AKTTool.Models
 {
-  public class Door : IModel
+  public class General : EntityBase
   {
     public string type { get; set; }
     public string code { get; set; }
