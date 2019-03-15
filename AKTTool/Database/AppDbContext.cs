@@ -25,7 +25,8 @@ namespace AKTTool.Database
       var builder = new DbContextOptionsBuilder<AppDbContext>();
       var configuration = config.Build();
 
-      builder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+      //builder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+      builder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
       return new AppDbContext(builder.Options);
     }
   }

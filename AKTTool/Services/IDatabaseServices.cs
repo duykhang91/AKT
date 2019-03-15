@@ -5,6 +5,7 @@ namespace AKTTool.Services
 {
   public interface IDatabaseServices
   {
-    Task<Door> insert(Door doors);
+    Task<Door> Insert(Door doors);
+    Task<Door> GetList(int page, int pageSize);
   }
 }

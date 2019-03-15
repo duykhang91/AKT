@@ -6,6 +6,6 @@ namespace AKTTool.Models
   {
     [Key]
     public int Id { get; set; }
-    public int gridRow { get; set; }
+    public byte[] RowVersion { get; set; }
   }
 }

@@ -6,9 +6,11 @@
 
 @if ((Model != null) && (Model.doors != null))
 {
-  foreach(var door in Model.doors)
+  foreach (var door in Model.doors)
   {
     <p>@door.type</p>
+    <p>@door.code</p>
+    <p>@door.link</p>
   }
 }
 

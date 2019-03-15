@@ -1,5 +1,7 @@
 ﻿using AKTTool.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace AKTTool.Repository
@@ -18,10 +20,10 @@ namespace AKTTool.Repository
 
     void Delete(TEntity entity);
 
-    //IFluentQuery<TEntity> Query(IQueryObject<TEntity> queryObject, bool includeDependents);
+    IFluentQuery<TEntity> Query(IQueryObject<TEntity> queryObject);
 
-    //IFluentQuery<TEntity> Query(Expression<Func<TEntity, bool>> query, bool includeDependents);
+    IFluentQuery<TEntity> Query(Expression<Func<TEntity, bool>> query);
 
-    //IFluentQuery<TEntity> Query(bool includeDependents);
+    IFluentQuery<TEntity> Query();
   }
 }

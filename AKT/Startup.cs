@@ -47,15 +47,18 @@ namespace AKT
 
       //Identity
       services.AddDbContext<ApplicationDbContext>(options =>
-          options.UseSqlServer(
+          options.UseNpgsql(
               Configuration.GetConnectionString("DefaultConnection")));
       services.AddDefaultIdentity<IdentityUser>()
           .AddEntityFrameworkStores<ApplicationDbContext>();
 
       // DbContext
       services.AddDbContext<AppDbContext>(options =>
-           options.UseSqlServer(
+           options.UseNpgsql(
                Configuration.GetConnectionString("DefaultConnection")));
+      services.AddEntityFrameworkNpgsql()
+          .AddDbContext<AppDbContext>()
+          .BuildServiceProvider();
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

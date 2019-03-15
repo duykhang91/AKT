@@ -4,7 +4,7 @@ namespace AKTTool.Models
 {
   public class Door : EntityBase
   {
-    public Common input { get; set; }
-    public List<Common> doors { get; set; }
+    public Item input { get; set; }
+    public List<Item> doors { get; set; }
   }
 }

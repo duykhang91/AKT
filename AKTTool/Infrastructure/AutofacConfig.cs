@@ -26,7 +26,7 @@ namespace AKTTool.Infrastructure
 
       // Services
       builder.RegisterType<DatabaseServices>().As<IDatabaseServices>();
-      //builder.RegisterGeneric(typeof(DataProvider<>)).As(typeof(IDataProvider<>));
+      builder.RegisterGeneric(typeof(DataProvider<>)).As(typeof(IDataProvider<>));
 
       RegisterDependenciesByConvention(builder);
     }
@@ -36,7 +36,7 @@ namespace AKTTool.Infrastructure
     /// </summary>
     private static void RegisterDependenciesByConvention(ContainerBuilder builder)
     {
-      var neededAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.StartsWith("ADJ")).ToArray();
+      var neededAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.StartsWith("AKT")).ToArray();
       builder.RegisterAssemblyTypes(neededAssemblies)
           .AsImplementedInterfaces()
           .PreserveExistingDefaults();

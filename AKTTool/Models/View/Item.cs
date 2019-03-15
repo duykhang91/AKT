@@ -1,6 +1,6 @@
 ﻿namespace AKTTool.Models
 {
-   public class Common : EntityBase
+   public class Item : EntityBase
   {
     public string type { get; set; }
     public string code { get; set; }

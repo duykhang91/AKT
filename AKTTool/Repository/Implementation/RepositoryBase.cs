@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace AKTTool.Repository
@@ -67,20 +68,20 @@ namespace AKTTool.Repository
       DbSet.Remove(entity);
     }
 
-    //public IFluentQuery<TEntity> Query(bool includeDependents)
-    //{
-    //  return new FluentQuery<TEntity>(this, includeDependents ? IncludeDependents : null);
-    //}
+    public IFluentQuery<TEntity> Query()
+    {
+      return new FluentQuery<TEntity>(this);
+    }
 
-    //public virtual IFluentQuery<TEntity> Query(IQueryObject<TEntity> queryObject, bool includeDependents)
-    //{
-    //  return new FluentQuery<TEntity>(this, queryObject, includeDependents ? IncludeDependents : null);
-    //}
+    public virtual IFluentQuery<TEntity> Query(IQueryObject<TEntity> queryObject)
+    {
+      return new FluentQuery<TEntity>(this, queryObject);
+    }
 
-    //public virtual IFluentQuery<TEntity> Query(Expression<Func<TEntity, bool>> query, bool includeDependents)
-    //{
-    //  return new FluentQuery<TEntity>(this, query, includeDependents ? IncludeDependents : null);
-    //}
+    public virtual IFluentQuery<TEntity> Query(Expression<Func<TEntity, bool>> query)
+    {
+      return new FluentQuery<TEntity>(this, query);
+    }
 
     internal virtual IQueryable<TEntity> GetQueryable()
     {
