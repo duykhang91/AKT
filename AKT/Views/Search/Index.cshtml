@@ -4,17 +4,46 @@
   ViewData["Title"] = "Search";
 }
 
-@if ((Model != null) && (Model.doors != null))
-{
-  foreach (var door in Model.doors)
+<div class="uk-grid uk-flex-center">
+  @if ((Model != null) && (Model.doors != null))
   {
-    <p>@door.type</p>
-    <p>@door.code</p>
-    <p>@door.link</p>
+    foreach (var door in Model.doors)
+    {
+      <p>@door.type</p>
+      <p>@door.code</p>
+      <p>@door.link</p>
+    }
   }
-}
 
-<form asp-controller="Home" asp-action="Insert" method="post">
-  <input asp-for="input.type" />
-  <button type="submit">Submit</button>
-</form>
+  <form asp-controller="Home" asp-action="Insert" method="post">
+    <table>
+      <thead>
+        <tr>
+          <td>
+            <label asp-for="input.type"></label>
+          </td>
+          <td>
+            <label asp-for="input.code"></label>
+          </td>
+          <td>
+            <label asp-for="input.link"></label>
+          </td>
+          <td>
+            <button type="submit">Submit</button>
+          </td>
+        </tr>
+      </thead>
+      <tr>
+        <td>
+          <input asp-for="input.type" />
+        </td>
+        <td>
+          <input asp-for="input.code" />
+        </td>
+        <td>
+          <input asp-for="input.link" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
