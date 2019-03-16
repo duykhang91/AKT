@@ -1,49 +1,200 @@
-﻿@model AKTTool.Models.Door
+﻿@model AKTTool.Models.GeneralView
 
-@{
-  ViewData["Title"] = "Search";
-}
+<span class="heading uk-align-center">Search Engine</span>
 
-<div class="uk-grid uk-flex-center">
-  @if ((Model != null) && (Model.doors != null))
-  {
-    foreach (var door in Model.doors)
-    {
-      <p>@door.type</p>
-      <p>@door.code</p>
-      <p>@door.link</p>
-    }
-  }
+<div id="search" class="uk-grid uk-flex-center uk-align-center" style="width: 80%">
 
-  <form asp-controller="Home" asp-action="Insert" method="post">
-    <table>
-      <thead>
+  <!--SearchDesktop-->
+  <div class="uk-card uk-card-default uk-card-body" id="searchDesktop">
+    <form asp-action="Search" asp-controller="Search" id="searchForm"
+          data-ajax-complete="showResult"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-mode="replace"
+          data-ajax-update="#resultPartial">
+
+      <table class="uk-table uk-table-small uk-width-1-1">
+        <thead>
+          <tr>
+            <td>
+              <label asp-for="type"></label>
+            </td>
+            <td>
+              <label asp-for="code"></label>
+            </td>
+            <td>
+              <label asp-for="link"></label>
+            </td>
+            <td>
+              <button type="submit" class="uk-button uk-button-primary">Search</button>
+            </td>
+          </tr>
+        </thead>
         <tr>
           <td>
-            <label asp-for="input.type"></label>
+            <input asp-for="item.type" class="uk-input" />
           </td>
           <td>
-            <label asp-for="input.code"></label>
+            <input asp-for="item.code" class="uk-input" />
           </td>
           <td>
-            <label asp-for="input.link"></label>
+            <input asp-for="item.link" class="uk-input" />
+          </td>
+          <td></td>
+        </tr>
+      </table>
+
+    </form>
+  </div>
+
+  <!--SearchMobile-->
+  <div class="uk-card uk-card-default uk-card-body" id="searchMobile">
+    <form asp-action="Search" asp-controller="Search" id="searchForm"
+          data-ajax-complete="showResult"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-mode="replace"
+          data-ajax-update="#resultPartial">
+
+      <table class="uk-table uk-table-small uk-width-1-1">
+        <tr>
+          <td>
+            <label asp-for="type"></label>
           </td>
           <td>
-            <button type="submit">Submit</button>
+            <input asp-for="item.type" class="uk-input" />
           </td>
         </tr>
-      </thead>
-      <tr>
-        <td>
-          <input asp-for="input.type" />
-        </td>
-        <td>
-          <input asp-for="input.code" />
-        </td>
-        <td>
-          <input asp-for="input.link" />
-        </td>
-      </tr>
-    </table>
-  </form>
+        <tr>
+          <td>
+            <label asp-for="code"></label>
+          </td>
+          <td>
+            <input asp-for="item.code" class="uk-input" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label asp-for="link"></label>
+          </td>
+          <td>
+            <input asp-for="item.link" class="uk-input" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button type="submit" class="uk-button uk-button-primary">Search</button>
+          </td>
+          <td></td>
+        </tr>
+      </table>
+
+    </form>
+  </div>
+
+  <!--InsertDesktop-->
+  <div id="insertDesktop" class="uk-card uk-card-default uk-card-body">
+    <form asp-action="Insert" asp-controller="Search"
+          data-ajax-complete="showResult"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-mode="replace"
+          data-ajax-update="#resultPartial">
+
+      <table class="uk-table uk-table-small uk-width-1-1">
+        <thead>
+          <tr>
+            <td>
+              <label asp-for="type"></label>
+            </td>
+            <td>
+              <label asp-for="code"></label>
+            </td>
+            <td>
+              <label asp-for="link"></label>
+            </td>
+            <td>
+              <button type="submit" class="uk-button uk-button-danger">Add</button>
+            </td>
+          </tr>
+        </thead>
+        <tr>
+          <td>
+            <input asp-for="type" class="uk-input" />
+            <span asp-validation-for="type" class="uk-alert-danger"></span>
+          </td>
+          <td>
+            <input asp-for="code" class="uk-input" />
+            <span asp-validation-for="code" class="uk-alert-danger"></span>
+          </td>
+          <td>
+            <input asp-for="link" class="uk-input" />
+            <span asp-validation-for="link" class="uk-alert-danger"></span>
+          </td>
+          <td></td>
+        </tr>
+      </table>
+
+    </form>
+  </div>
+
+  <!--InsertMobile-->
+  <div id="insertMobile" class="uk-card uk-card-default uk-card-body">
+    <form asp-action="Insert" asp-controller="Search"
+          data-ajax-complete="showResult"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-mode="replace"
+          data-ajax-update="#resultPartial">
+
+      <table class="uk-table uk-table-small uk-width-1-1">
+        <tr>
+          <td>
+            <label asp-for="type"></label>
+          </td>
+          <td>
+            <input asp-for="type" class="uk-input" />
+            <span asp-validation-for="type" class="uk-alert-danger"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label asp-for="code"></label>
+          </td>
+          <td>
+            <input asp-for="code" class="uk-input" />
+            <span asp-validation-for="code" class="uk-alert-danger"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label asp-for="link"></label>
+          </td>
+          <td>
+            <input asp-for="link" class="uk-input" />
+            <span asp-validation-for="link" class="uk-alert-danger"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button type="submit" class="uk-button uk-button-danger">Add</button>
+          </td>
+          <td></td>
+        </tr>
+      </table>
+
+    </form>
+  </div>
+
+  <!--Result-->
+  <div id="resultPartial" class="uk-card uk-card-default uk-card-body">
+    <partial name="_Result" model="Model" />
+  </div>
 </div>
+
+<br />
+
+@section Scripts
+  {
+  <script type="text/javascript" src="@Url.Content("~/js/Search.js")"></script>
+}

@@ -1,93 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using AKTTool.Models;
+using AKTTool.Services;
+using System;
 
 namespace AKTApp.Controllers
 {
-    public class SearchController : Controller
+  public class SearchController : Controller
+  {
+    private readonly IDatabaseServices _databaseServices;
+    private readonly int pageSize = 20;
+
+    public SearchController(IDatabaseServices databaseServices)
     {
-        // GET: Search
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Search/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Search/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Search/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Search/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Search/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Search/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Search/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+      _databaseServices = databaseServices;
     }
+
+    // GET: Search
+    public async Task<ActionResult> Index()
+    {
+      setViewBags();
+      GeneralView generals = new GeneralView();
+      generals = await _databaseServices.Search(null, null, null, 1, pageSize);
+
+      return View(generals);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Insert(GeneralView model)
+    {
+      setViewBags();
+
+      await _databaseServices.Insert(model);
+
+      if (ModelState.IsValid)
+      {
+        model = await _databaseServices.Search(null, null, null, 1, pageSize);
+        ViewBag.ShowModal = "success";
+      }
+
+      return PartialView("_Result", model);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Search(GeneralView model, string page = null)
+    {
+      setViewBags();
+      if (page == null) { page = "1"; }
+      int pageIndex = int.Parse(page);
+      ViewBag.Page = pageIndex;
+
+      model = await _databaseServices.Search(model.item.type, model.item.code, model.item.link, pageIndex, pageSize);
+
+      return PartialView("_Result", model);
+    }
+
+    public void setViewBags()
+    {
+      ViewBag.Page = 1;
+      ViewBag.ShowModal = null;
+    }
+  }
 }

@@ -1,0 +1,69 @@
+﻿@model AKTTool.Models.GeneralView
+<!--Result Popup-->
+@if (ViewBag.ShowModal != null)
+{
+  string modal = ViewBag.ShowModal;
+  <button type="button" uk-toggle="target: #resultModal" id="openmodal" hidden="hidden">Open</button>
+
+  <div id="resultModal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+      <p class="uk-text-success uk-text-bold" style="margin: 0 0 0 0">Successfully Added New Item</p>
+      <button class="uk-modal-close-default" type="button" uk-close></button>
+    </div>
+  </div>
+}
+
+<!--Search Result-->
+@if ((Model != null) && (Model.generals != null) && (Model.generals.Items != null))
+{
+  <!--Paging-->
+  int currentPage = ViewBag.Page;
+  int totalPage = Model.generals.PageCount;
+  <ul class="uk-pagination uk-flex-center">
+    @if (currentPage > 1)
+    {
+      <li><a value="@(currentPage - 1)" name="page" class="paging"><span uk-pagination-previous></span></a></li>
+    }
+
+    @for (int i = 1; i <= totalPage; i++)
+    {
+      if (i == currentPage)
+      {
+        <li class="uk-disabled"><a value="@i" name="page" class="paging"><u>@i</u></a></li>
+      }
+      else
+      {
+        <li><a value="@i" name="page" class="paging">@i</a></li>
+      }
+    }
+
+    @if (currentPage < totalPage)
+    {
+      <li><a value="@(currentPage + 1)" name="page" class="paging"><span uk-pagination-next></span></a></li>
+    }
+  </ul>
+
+  <table class="uk-width-1-1 uk-table uk-table-small uk-table-divider uk-table-striped">
+    <thead style="text-align: center">
+      <tr>
+        <td>
+          <label asp-for="type"></label>
+        </td>
+        <td>
+          <label asp-for="code"></label>
+        </td>
+        <td>
+          <label asp-for="link"></label>
+        </td>
+      </tr>
+    </thead>
+    @foreach (var item in Model.generals.Items)
+    {
+      <tr style="word-wrap: break-word">
+        <td>@item.type</td>
+        <td>@item.code</td>
+        <td class="uk-text-truncate" title="@item.link"><a href="@item.link">@item.link</a></td>
+      </tr>
+    }
+  </table>
+}

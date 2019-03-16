@@ -19,6 +19,8 @@
         <ul class="cd-top-nav">
           <li><a asp-controller="Home" asp-action="Index">Home</a></li>
           <li><a asp-controller="Search" asp-action="Index">Search</a></li>
+          <li><a asp-controller="Home" asp-action="About">About</a></li>
+          <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
           <li class="has-children account">
             <a href="#0">
               <img src="/images/cd-avatar.jpg" alt="avatar">
@@ -73,11 +75,14 @@
   </div>
   @*<partial name="_CookieConsentPartial" />*@
 
-  <footer>
-    &copy; 2019 - AKT
+  <footer style="color: white">
+    &copy; 2019 - AKT - Architect
   </footer>
 
   <script src="/lib/jquery/dist/jquery.js"></script>
+  <script src="/lib/jquery-validation/dist/jquery.validate.js"></script>
+  <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+  <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
   <script src="/js/uikit.min.js"></script>
   <script src="/js/Layout.js"></script>
   <script src="/js/navbar.js"></script>
