@@ -1,0 +1,20 @@
+﻿@model AKTTool.Models.Door
+
+@{
+  ViewData["Title"] = "Search";
+}
+
+@if ((Model != null) && (Model.doors != null))
+{
+  foreach (var door in Model.doors)
+  {
+    <p>@door.type</p>
+    <p>@door.code</p>
+    <p>@door.link</p>
+  }
+}
+
+<form asp-controller="Home" asp-action="Insert" method="post">
+  <input asp-for="input.type" />
+  <button type="submit">Submit</button>
+</form>
