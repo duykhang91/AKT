@@ -7,7 +7,18 @@
 
   <div id="resultModal" uk-modal>
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-      <p class="uk-text-success uk-text-bold" style="margin: 0 0 0 0">Successfully Added New Item</p>
+      @if (modal.Contains("deleted"))
+      {
+        <p class="uk-text-danger uk-text-bold" style="margin: 0 0 0 0">Item #@modal.Substring(modal.IndexOf("#") + 1, modal.Length - modal.IndexOf("#") - 1) is deleted</p>
+      }
+      else if (modal.Contains("updated"))
+      {
+        <p class="uk-text-success uk-text-bold" style="margin: 0 0 0 0">Item #@modal.Substring(modal.IndexOf("#") + 1, modal.Length - modal.IndexOf("#") - 1) is updated</p>
+      }
+      else
+      {
+        <p class="uk-text-success uk-text-bold" style="margin: 0 0 0 0">New item added</p>
+      }
       <button class="uk-modal-close-default" type="button" uk-close></button>
     </div>
   </div>
@@ -66,8 +77,10 @@
         <td>@item.code</td>
         <td class="uk-text-truncate" title="@item.link"><a href="@item.link">@item.link</a></td>
         <td>
-          <a asp-controller="Search" asp-action="Edit"><img src="./images/pencil.svg" /></a>
-          <a asp-controller="Search" asp-action="Delete" asp-route-id="@item.Id"><img src="./images/minus-circle.svg" /></a>
+          <div id="updateCell@(item.Id)">
+            <a asp-controller="Search" asp-action="Edit"><img src="./images/pencil.svg" /></a>
+            <a value="@(item.Id + "delete" + ViewBag.Page)" name="update" class="update"><img src="./images/minus-circle.svg" /></a>
+          </div>
         </td>
       </tr>
     }

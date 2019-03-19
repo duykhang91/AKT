@@ -95,6 +95,7 @@
   <!--InsertDesktop-->
   <div id="insertDesktop" class="uk-card uk-card-default uk-card-body">
     <form asp-action="Insert" asp-controller="Search"
+          data-ajax-begin="disableAddButton"
           data-ajax-complete="showResult"
           data-ajax="true"
           data-ajax-method="POST"
@@ -105,31 +106,31 @@
         <thead>
           <tr>
             <td>
-              <label asp-for="item.type"></label>
+              <label asp-for="itemInsert.type"></label>
             </td>
             <td>
-              <label asp-for="item.code"></label>
+              <label asp-for="itemInsert.code"></label>
             </td>
             <td>
-              <label asp-for="item.link"></label>
+              <label asp-for="itemInsert.link"></label>
             </td>
             <td>
-              <button type="submit" class="uk-button uk-button-danger">Add</button>
+              <button id="addButton" type="submit" class="uk-button uk-button-danger">Add</button>
             </td>
           </tr>
         </thead>
         <tr>
           <td>
-            <input asp-for="item.type" class="uk-input" />
-            <span asp-validation-for="item.type" class="uk-alert-danger"></span>
+            <input asp-for="itemInsert.type" class="uk-input" />
+            <span asp-validation-for="itemInsert.type" class="uk-alert-danger"></span>
           </td>
           <td>
-            <input asp-for="item.code" class="uk-input" />
-            <span asp-validation-for="item.code" class="uk-alert-danger"></span>
+            <input asp-for="itemInsert.code" class="uk-input" />
+            <span asp-validation-for="itemInsert.code" class="uk-alert-danger"></span>
           </td>
           <td>
-            <input asp-for="item.link" class="uk-input" />
-            <span asp-validation-for="item.link" class="uk-alert-danger"></span>
+            <input asp-for="itemInsert.link" class="uk-input" />
+            <span asp-validation-for="itemInsert.link" class="uk-alert-danger"></span>
           </td>
           <td></td>
         </tr>
@@ -150,45 +151,53 @@
       <table class="uk-table uk-table-small uk-width-1-1">
         <tr>
           <td>
-            <label asp-for="item.type"></label>
+            <label asp-for="itemInsert.type"></label>
           </td>
           <td>
-            <input asp-for="item.type" class="uk-input" />
-            <span asp-validation-for="item.type" class="uk-alert-danger"></span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label asp-for="item.code"></label>
-          </td>
-          <td>
-            <input asp-for="item.code" class="uk-input" />
-            <span asp-validation-for="item.code" class="uk-alert-danger"></span>
+            <input asp-for="itemInsert.type" class="uk-input" />
+            <span asp-validation-for="itemInsert.type" class="uk-alert-danger"></span>
           </td>
         </tr>
         <tr>
           <td>
-            <label asp-for="item.link"></label>
+            <label asp-for="itemInsert.code"></label>
           </td>
           <td>
-            <input asp-for="item.link" class="uk-input" />
-            <span asp-validation-for="item.link" class="uk-alert-danger"></span>
+            <input asp-for="itemInsert.code" class="uk-input" />
+            <span asp-validation-for="itemInsert.code" class="uk-alert-danger"></span>
           </td>
         </tr>
         <tr>
           <td>
-            <button type="submit" class="uk-button uk-button-danger">Add</button>
+            <label asp-for="itemInsert.link"></label>
+          </td>
+          <td>
+            <input asp-for="itemInsert.link" class="uk-input" />
+            <span asp-validation-for="itemInsert.link" class="uk-alert-danger"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button id="addButton" type="submit" class="uk-button uk-button-danger">Add</button>
           </td>
           <td></td>
         </tr>
       </table>
-
     </form>
   </div>
 
-  <!--Result-->
-  <div id="resultPartial" class="uk-card uk-card-default uk-card-body">
-    <partial name="_Result" model="Model" />
+  <div class="uk-card uk-card-default uk-card-body">
+    <form asp-action="Update" asp-controller="Search" id="updateForm"
+          data-ajax-complete="showResult"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-mode="replace"
+          data-ajax-update="#resultPartial">
+      <!--Result-->
+      <div id="resultPartial">
+        <partial name="_Result" model="Model" />
+      </div>
+    </form>
   </div>
 </div>
 

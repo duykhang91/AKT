@@ -31,7 +31,7 @@ namespace AKTApp.Controllers
     {
       setViewBags();
 
-      await _databaseServices.InsertOrUpdateAsync(model);
+      await _databaseServices.InsertOrUpdateAsync(model.itemInsert);
 
       if (ModelState.IsValid)
       {
@@ -55,18 +55,48 @@ namespace AKTApp.Controllers
       return PartialView("_Result", model);
     }
 
-    [HttpPost]
-    public async Task<ActionResult> Delete()
+    public async Task<ActionResult> Update(GeneralView model, string update)
     {
       setViewBags();
-      //if (page == null) { page = "1"; }
-      //int pageIndex = int.Parse(page);
-      //ViewBag.Page = pageIndex;
+      string method;
+      if (update.Contains("update"))
+      {
+        method = "update";
+        update = update.Replace("update", "#");
+      }
+      else {
+        method = "delete";
+        update = update.Replace("delete", "#");
+      }
 
-      //model = await _databaseServices.SearchAsync(model.item.type, model.item.code, model.item.link, pageIndex, pageSize);
+      int id = int.Parse(update.Substring(0, update.IndexOf('#')));
+      int pageIndex = int.Parse(update.Substring(update.IndexOf('#')+1, update.Length - update.IndexOf('#') - 1));
+      ViewBag.Page = pageIndex;
 
-      //return PartialView("_Result", model);
-      return View();
+      if (method == "update")
+      {
+        await _databaseServices.InsertOrUpdateAsync(model.itemInsert);
+
+      }
+      else
+      {
+        bool isDeteled = await _databaseServices.DeleteAsync(id);
+        if (isDeteled)
+        {
+          ViewBag.ShowModal = "deleted#" + id;
+        }
+      }
+
+      model = await _databaseServices.SearchAsync(null, null, null, pageIndex, pageSize);
+
+      if (model.generals.Items.Count == 0)
+      {
+        pageIndex--;
+        ViewBag.Page = pageIndex;
+        model = await _databaseServices.SearchAsync(null, null, null, pageIndex, pageSize);
+      }
+
+      return PartialView("_Result", model);
     }
 
     public void setViewBags()

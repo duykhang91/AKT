@@ -23,30 +23,30 @@ namespace AKTTool.Services
       _dataProvider = dataProvider;
     }
 
-    public async Task<GeneralView> InsertOrUpdateAsync(GeneralView generalView)
+    public async Task<General> InsertOrUpdateAsync(ItemInsert itemInsert)
     {
-      General general = await _context.GetByIdAsync(generalView.Id);
+      General general = await _context.GetByIdAsync(itemInsert.Id);
       if (general != null)
       {
-        generalView.item.Id = general.Id;
-        general = mapper(generalView.item);
+        itemInsert.Id = general.Id;
+        general = mapper(itemInsert);
 
         _context.Update(general);
       }
       else
       {
         general = new General();
-        general = mapper(generalView.item);
+        general = mapper(itemInsert);
 
         _context.Insert(general);
       }
 
       await UnitOfWork.SaveChangesAsync();
 
-      return generalView;
+      return general;
     }
 
-    private General mapper(Item item)
+    private General mapper(ItemInsert item)
     {
       General result = new General();
       result.Id = item.Id;
@@ -67,17 +67,17 @@ namespace AKTTool.Services
 
       if (type != null)
       {
-        Expression<Func<General, bool>> filter = x => x.type == type;
+        Expression<Func<General, bool>> filter = x => x.type.Contains(type);
         All = All.And(filter);
       }
       if (code != null)
       {
-        Expression<Func<General, bool>> filter = x => x.code == code;
+        Expression<Func<General, bool>> filter = x => x.code.Contains(code);
         All = All.And(filter);
       }
       if (link != null)
       {
-        Expression<Func<General, bool>> filter = x => x.link == link;
+        Expression<Func<General, bool>> filter = x => x.link.Contains(link);
         All = All.And(filter);
       }
 
@@ -87,6 +87,7 @@ namespace AKTTool.Services
       foreach (var result in results.Items)
       {
         Item item = new Item();
+        item.Id = result.Id;
         item.type = result.type;
         item.code = result.code;
         item.link = result.link;
