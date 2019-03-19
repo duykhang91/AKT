@@ -37,6 +37,9 @@ body {
 #insertDesktop {
   display: none;
 }
+.editColumn {
+  width: 20px;
+}
 @media only screen and (min-width: 600px) {
   .heading {
     font-size: 3em;
@@ -52,5 +55,8 @@ body {
   }
   #insertMobile {
     display: none;
+  }
+  .editColumn {
+    width: 45px;
   }
 }

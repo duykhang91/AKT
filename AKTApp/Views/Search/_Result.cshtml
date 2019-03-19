@@ -55,6 +55,7 @@
         <td>
           <label asp-for="item.link"></label>
         </td>
+        <td class="editColumn"></td>
       </tr>
     </thead>
     @foreach (var item in Model.generals.Items)
@@ -64,6 +65,10 @@
         <td>@item.type</td>
         <td>@item.code</td>
         <td class="uk-text-truncate" title="@item.link"><a href="@item.link">@item.link</a></td>
+        <td>
+          <a asp-controller="Search" asp-action="Edit"><img src="./images/pencil.svg" /></a>
+          <a asp-controller="Search" asp-action="Delete" asp-route-id="@item.Id"><img src="./images/minus-circle.svg" /></a>
+        </td>
       </tr>
     }
   </table>

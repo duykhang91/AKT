@@ -55,6 +55,20 @@ namespace AKTApp.Controllers
       return PartialView("_Result", model);
     }
 
+    [HttpPost]
+    public async Task<ActionResult> Delete()
+    {
+      setViewBags();
+      //if (page == null) { page = "1"; }
+      //int pageIndex = int.Parse(page);
+      //ViewBag.Page = pageIndex;
+
+      //model = await _databaseServices.SearchAsync(model.item.type, model.item.code, model.item.link, pageIndex, pageSize);
+
+      //return PartialView("_Result", model);
+      return View();
+    }
+
     public void setViewBags()
     {
       ViewBag.Page = 1;
