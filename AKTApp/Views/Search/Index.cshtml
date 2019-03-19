@@ -17,13 +17,13 @@
         <thead>
           <tr>
             <td>
-              <label asp-for="type"></label>
+              <label asp-for="item.type"></label>
             </td>
             <td>
-              <label asp-for="code"></label>
+              <label asp-for="item.code"></label>
             </td>
             <td>
-              <label asp-for="link"></label>
+              <label asp-for="item.link"></label>
             </td>
             <td>
               <button type="submit" class="uk-button uk-button-primary">Search</button>
@@ -59,7 +59,7 @@
       <table class="uk-table uk-table-small uk-width-1-1">
         <tr>
           <td>
-            <label asp-for="type"></label>
+            <label asp-for="item.type"></label>
           </td>
           <td>
             <input asp-for="item.type" class="uk-input" />
@@ -67,7 +67,7 @@
         </tr>
         <tr>
           <td>
-            <label asp-for="code"></label>
+            <label asp-for="item.code"></label>
           </td>
           <td>
             <input asp-for="item.code" class="uk-input" />
@@ -75,7 +75,7 @@
         </tr>
         <tr>
           <td>
-            <label asp-for="link"></label>
+            <label asp-for="item.link"></label>
           </td>
           <td>
             <input asp-for="item.link" class="uk-input" />
@@ -105,13 +105,13 @@
         <thead>
           <tr>
             <td>
-              <label asp-for="type"></label>
+              <label asp-for="item.type"></label>
             </td>
             <td>
-              <label asp-for="code"></label>
+              <label asp-for="item.code"></label>
             </td>
             <td>
-              <label asp-for="link"></label>
+              <label asp-for="item.link"></label>
             </td>
             <td>
               <button type="submit" class="uk-button uk-button-danger">Add</button>
@@ -120,16 +120,16 @@
         </thead>
         <tr>
           <td>
-            <input asp-for="type" class="uk-input" />
-            <span asp-validation-for="type" class="uk-alert-danger"></span>
+            <input asp-for="item.type" class="uk-input" />
+            <span asp-validation-for="item.type" class="uk-alert-danger"></span>
           </td>
           <td>
-            <input asp-for="code" class="uk-input" />
-            <span asp-validation-for="code" class="uk-alert-danger"></span>
+            <input asp-for="item.code" class="uk-input" />
+            <span asp-validation-for="item.code" class="uk-alert-danger"></span>
           </td>
           <td>
-            <input asp-for="link" class="uk-input" />
-            <span asp-validation-for="link" class="uk-alert-danger"></span>
+            <input asp-for="item.link" class="uk-input" />
+            <span asp-validation-for="item.link" class="uk-alert-danger"></span>
           </td>
           <td></td>
         </tr>
@@ -150,29 +150,29 @@
       <table class="uk-table uk-table-small uk-width-1-1">
         <tr>
           <td>
-            <label asp-for="type"></label>
+            <label asp-for="item.type"></label>
           </td>
           <td>
-            <input asp-for="type" class="uk-input" />
-            <span asp-validation-for="type" class="uk-alert-danger"></span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label asp-for="code"></label>
-          </td>
-          <td>
-            <input asp-for="code" class="uk-input" />
-            <span asp-validation-for="code" class="uk-alert-danger"></span>
+            <input asp-for="item.type" class="uk-input" />
+            <span asp-validation-for="item.type" class="uk-alert-danger"></span>
           </td>
         </tr>
         <tr>
           <td>
-            <label asp-for="link"></label>
+            <label asp-for="item.code"></label>
           </td>
           <td>
-            <input asp-for="link" class="uk-input" />
-            <span asp-validation-for="link" class="uk-alert-danger"></span>
+            <input asp-for="item.code" class="uk-input" />
+            <span asp-validation-for="item.code" class="uk-alert-danger"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label asp-for="item.link"></label>
+          </td>
+          <td>
+            <input asp-for="item.link" class="uk-input" />
+            <span asp-validation-for="item.link" class="uk-alert-danger"></span>
           </td>
         </tr>
         <tr>

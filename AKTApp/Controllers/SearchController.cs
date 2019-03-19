@@ -21,7 +21,7 @@ namespace AKTApp.Controllers
     {
       setViewBags();
       GeneralView generals = new GeneralView();
-      generals = await _databaseServices.Search(null, null, null, 1, pageSize);
+      generals = await _databaseServices.SearchAsync(null, null, null, 1, pageSize);
 
       return View(generals);
     }
@@ -31,11 +31,11 @@ namespace AKTApp.Controllers
     {
       setViewBags();
 
-      await _databaseServices.Insert(model);
+      await _databaseServices.InsertOrUpdateAsync(model);
 
       if (ModelState.IsValid)
       {
-        model = await _databaseServices.Search(null, null, null, 1, pageSize);
+        model = await _databaseServices.SearchAsync(null, null, null, 1, pageSize);
         ViewBag.ShowModal = "success";
       }
 
@@ -50,7 +50,7 @@ namespace AKTApp.Controllers
       int pageIndex = int.Parse(page);
       ViewBag.Page = pageIndex;
 
-      model = await _databaseServices.Search(model.item.type, model.item.code, model.item.link, pageIndex, pageSize);
+      model = await _databaseServices.SearchAsync(model.item.type, model.item.code, model.item.link, pageIndex, pageSize);
 
       return PartialView("_Result", model);
     }

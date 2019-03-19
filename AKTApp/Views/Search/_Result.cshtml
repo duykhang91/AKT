@@ -47,19 +47,20 @@
     <thead style="text-align: center">
       <tr>
         <td>
-          <label asp-for="type"></label>
+          <label asp-for="item.type"></label>
         </td>
         <td>
-          <label asp-for="code"></label>
+          <label asp-for="item.code"></label>
         </td>
         <td>
-          <label asp-for="link"></label>
+          <label asp-for="item.link"></label>
         </td>
       </tr>
     </thead>
     @foreach (var item in Model.generals.Items)
     {
       <tr style="word-wrap: break-word">
+        <td style="display: none">@item.Id</td>
         <td>@item.type</td>
         <td>@item.code</td>
         <td class="uk-text-truncate" title="@item.link"><a href="@item.link">@item.link</a></td>

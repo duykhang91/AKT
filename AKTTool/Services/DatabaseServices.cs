@@ -23,20 +23,41 @@ namespace AKTTool.Services
       _dataProvider = dataProvider;
     }
 
-    public async Task<GeneralView> Insert(GeneralView generalView)
+    public async Task<GeneralView> InsertOrUpdateAsync(GeneralView generalView)
     {
-      General general = new General();
-      general.type = generalView.type;
-      general.code = generalView.code;
-      general.link = generalView.link;
-      _context.Insert(general);
+      General general = await _context.GetByIdAsync(generalView.Id);
+      if (general != null)
+      {
+        generalView.item.Id = general.Id;
+        general = mapper(generalView.item);
+
+        _context.Update(general);
+      }
+      else
+      {
+        general = new General();
+        general = mapper(generalView.item);
+
+        _context.Insert(general);
+      }
 
       await UnitOfWork.SaveChangesAsync();
 
       return generalView;
     }
 
-    public async Task<GeneralView> Search(string type = null, string code = null, string link = null, int page = 1, int pageSize = pageSize)
+    private General mapper(Item item)
+    {
+      General result = new General();
+      result.Id = item.Id;
+      result.type = item.type;
+      result.code = item.code;
+      result.link = item.link;
+
+      return result;
+    }
+
+    public async Task<GeneralView> SearchAsync(string type = null, string code = null, string link = null, int page = 1, int pageSize = pageSize)
     {
       GeneralView rs = new GeneralView();
       rs.generals = new PagedListResult<Item>();
@@ -75,6 +96,20 @@ namespace AKTTool.Services
       rs.generals.TotalCount = results.TotalCount;
 
       return rs;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+      _context.Delete(id);
+
+      await UnitOfWork.SaveChangesAsync();
+
+      if (await _context.GetByIdAsync(id) != null)
+      {
+        return false;
+      }
+
+      return true;
     }
   }
 }

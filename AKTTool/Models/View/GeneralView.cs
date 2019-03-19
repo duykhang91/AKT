@@ -7,6 +7,11 @@ namespace AKTTool.Models
   {
     public Item item { get; set; }
 
+    public PagedListResult<Item> generals { get; set; }
+  }
+
+  public class Item : EntityBase
+  {
     [Display(Name = "Type")]
     [Required]
     public string type { get; set; }
@@ -19,7 +24,5 @@ namespace AKTTool.Models
     [Required]
     [Url]
     public string link { get; set; }
-
-    public PagedListResult<Item> generals { get; set; }
   }
 }
