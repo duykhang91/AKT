@@ -2,15 +2,17 @@
 using AKTTool.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AKTTool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190321173303_removeRowVersion")]
+    partial class removeRowVersion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,7 +22,7 @@ namespace AKTTool.Migrations
 
             modelBuilder.Entity("AKTTool.Models.General", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("code");
@@ -29,7 +31,7 @@ namespace AKTTool.Migrations
 
                     b.Property<string>("type");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("generals");
                 });

@@ -22,7 +22,7 @@ namespace AKTTool.Repository
 
     public virtual async Task<TEntity> GetByIdAsync(int id)
     {
-      var query = DbSet.Where(x => x.Id == id);
+      var query = DbSet.Where(x => x.id == id);
 
       return await query.FirstOrDefaultAsync();
     }
@@ -54,7 +54,7 @@ namespace AKTTool.Repository
 
     public virtual void Delete(int id)
     {
-      var entity = new TEntity { Id = id };
+      var entity = new TEntity { id = id };
       Delete(entity);
     }
 

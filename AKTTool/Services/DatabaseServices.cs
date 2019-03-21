@@ -25,10 +25,9 @@ namespace AKTTool.Services
 
     public async Task<General> InsertOrUpdateAsync(ItemInsert itemInsert)
     {
-      General general = await _context.GetByIdAsync(itemInsert.Id);
+      General general = await _context.GetByIdAsync(itemInsert.id);
       if (general != null)
       {
-        itemInsert.Id = general.Id;
         general = mapper(itemInsert);
 
         _context.Update(general);
@@ -49,7 +48,7 @@ namespace AKTTool.Services
     private General mapper(ItemInsert item)
     {
       General result = new General();
-      result.Id = item.Id;
+      result.id = item.id;
       result.type = item.type;
       result.code = item.code;
       result.link = item.link;
@@ -63,7 +62,7 @@ namespace AKTTool.Services
       rs.generals = new PagedListResult<Item>();
       rs.generals.Items = new List<Item>();
 
-      Expression<Func<General, bool>> All = x => x.Id > 0;
+      Expression<Func<General, bool>> All = x => x.id > 0;
 
       if (type != null)
       {
@@ -87,7 +86,7 @@ namespace AKTTool.Services
       foreach (var result in results.Items)
       {
         Item item = new Item();
-        item.Id = result.Id;
+        item.id = result.id;
         item.type = result.type;
         item.code = result.code;
         item.link = result.link;

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AKTTool.Models;
 using AKTTool.Services;
 using System;
+using System.Linq;
 
 namespace AKTApp.Controllers
 {
@@ -58,32 +59,38 @@ namespace AKTApp.Controllers
     public async Task<ActionResult> Update(GeneralView model, string update)
     {
       setViewBags();
-      string method;
-      if (update.Contains("update"))
+      int pageIndex = 1;
+      if (update != null)
       {
-        method = "update";
-        update = update.Replace("update", "#");
-      }
-      else {
-        method = "delete";
-        update = update.Replace("delete", "#");
-      }
+        string method = new String(update.Where(Char.IsLetter).ToArray());
+        update = update.Replace(method, "#");
 
-      int id = int.Parse(update.Substring(0, update.IndexOf('#')));
-      int pageIndex = int.Parse(update.Substring(update.IndexOf('#')+1, update.Length - update.IndexOf('#') - 1));
-      ViewBag.Page = pageIndex;
+        int id = int.Parse(update.Substring(0, update.IndexOf('#')));
+        pageIndex = int.Parse(update.Substring(update.IndexOf('#') + 1, update.Length - update.IndexOf('#') - 1));
+        ViewBag.Page = pageIndex;
 
-      if (method == "update")
-      {
-        await _databaseServices.InsertOrUpdateAsync(model.itemInsert);
-
-      }
-      else
-      {
-        bool isDeteled = await _databaseServices.DeleteAsync(id);
-        if (isDeteled)
+        switch (method)
         {
-          ViewBag.ShowModal = "deleted#" + id;
+          case "update":
+            if (ModelState.IsValid)
+            {
+              await _databaseServices.InsertOrUpdateAsync(model.itemInsert);
+            }
+            else
+            {
+              ViewBag.Edit = id;
+            }
+            break;
+          case "delete":
+            bool isDeteled = await _databaseServices.DeleteAsync(id);
+            if (isDeteled)
+            {
+              ViewBag.ShowModal = "deleted#" + id;
+            }
+            break;
+          case "edit":
+            ViewBag.Edit = id;
+            break;
         }
       }
 

@@ -72,16 +72,43 @@
     @foreach (var item in Model.generals.Items)
     {
       <tr style="word-wrap: break-word">
-        <td style="display: none">@item.Id</td>
-        <td>@item.type</td>
-        <td>@item.code</td>
-        <td class="uk-text-truncate" title="@item.link"><a href="@item.link">@item.link</a></td>
-        <td>
-          <div id="updateCell@(item.Id)">
-            <a asp-controller="Search" asp-action="Edit"><img src="./images/pencil.svg" /></a>
-            <a value="@(item.Id + "delete" + ViewBag.Page)" name="update" class="update"><img src="./images/minus-circle.svg" /></a>
-          </div>
-        </td>
+        <td style="display: none">@item.id</td>
+        @if ((ViewBag.Edit != null) && (ViewBag.Edit == item.id))
+        {
+          <td style="display: none">
+            <input asp-for="itemInsert.id" value="@item.id"/>
+          </td>
+          <td>
+            <input asp-for="itemInsert.type" value="@item.type" class="uk-input" />
+            <span asp-validation-for="itemInsert.type" class="uk-alert-danger"></span>
+          </td>
+          <td>
+            <input asp-for="itemInsert.code" value="@item.code" class="uk-input" />
+            <span asp-validation-for="itemInsert.code" class="uk-alert-danger"></span>
+          </td>
+          <td>
+            <input asp-for="itemInsert.link" value="@item.link" class="uk-input" />
+            <span asp-validation-for="itemInsert.link" class="uk-alert-danger"></span>
+          </td>
+          <td>
+            <div id="updateCell@(item.id)">
+              <a value="@(item.id + "update" + ViewBag.Page)" name="update" class="update"><img src="./images/check.svg" /></a>
+              <a value="@(item.id + "cancel" + ViewBag.Page)" name="update" class="update"><img src="./images/close.svg" /></a>
+            </div>
+          </td>
+        }
+        else
+        {
+          <td>@item.type</td>
+          <td>@item.code</td>
+          <td class="uk-text-truncate" title="@item.link"><a href="@item.link">@item.link</a></td>
+          <td>
+            <div id="updateCell@(item.id)">
+              <a value="@(item.id + "edit" + ViewBag.Page)" name="update" class="update"><img src="./images/pencil.svg" /></a>
+              <a value="@(item.id + "delete" + ViewBag.Page)" name="update" class="update"><img src="./images/minus-circle.svg" /></a>
+            </div>
+          </td>
+        }
       </tr>
     }
   </table>

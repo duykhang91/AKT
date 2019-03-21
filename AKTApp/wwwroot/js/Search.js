@@ -13,8 +13,10 @@
 $(document.body).on('click', '.update', function () {
   var value = $(this).attr("value");
   var name = $(this).attr("name");
-  var id = value.replace("update", "#");
-  id = id.replace("delete", "#");
+  var id = value.replace("delete", "#");
+  id = id.replace("update", "#");
+  id = id.replace("edit", "#");
+  id = id.replace("cancel", "#");
   id = id.substr(0, id.indexOf("#"));
 
   document.getElementById("updateCell" + id).innerHTML = "<div uk-spinner></div>";

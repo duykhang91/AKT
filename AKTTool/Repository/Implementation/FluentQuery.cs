@@ -65,7 +65,7 @@ namespace AKTTool.Repository
     {
       if (!_isSorted)
       {
-        _query = _query.OrderBy(x => x.Id);
+        _query = _query.OrderBy(x => x.id);
       }
 
       totalCount = _query.Count();
