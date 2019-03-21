@@ -25,8 +25,8 @@ namespace AKTTool.Services
 
     public async Task<General> InsertOrUpdateAsync(ItemInsert itemInsert)
     {
-      General general = await _context.GetByIdAsync(itemInsert.id);
-      if (general != null)
+      General general = new General();
+      if (itemInsert.id > 0)
       {
         general = mapper(itemInsert);
 
